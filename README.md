@@ -15,6 +15,7 @@
 - Adopts and extends the **LoFG (Level of Facade Generalization)** taxonomy across countries — 15 classes at LoFG3, 5 at LoFG2
 - Benchmarks **6 representative architectures** (PointNet++, KPConv, DGCNN, PointTransformer v1, PointTransformer v3, OctFormer)
 - Reveals strong **cross-continental domain shift**: several models degrade by more than 30 F1 points between European and Asian facades
+- ❗The link above provides the dataset at original point cloud density; for region-specific subsets (Singapore / Germany / UK), see [here](#)
 
 ## 📝 Abstract
 
