@@ -1,11 +1,11 @@
 # 🏡 🏯 UnderOneFacade 🏢 🏡
 
-**Repo of the ECCV'26 paper "UnderOneFacade: Worldwide Facade Semantic Segmentation Benchmark Dataset"**
+**Building on [ZAHA](https://github.com/OloOcki/zaha), UnderOneFacade is — to date — the largest benchmark for facade semantic segmentation of point clouds.**
 
 [[Dataset]](#) [[Paper]](#) [[Benchmark]](#) [[More]](#)
 
 <!-- 把你的方法图/teaser图放进 img/ 文件夹，文件名换成你自己的 -->
-![teaser](img/teaser.png)
+![teaser](images/teaser.png)
 
 ## 🌟 Highlights
 
