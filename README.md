@@ -18,7 +18,7 @@
 - ❗The link above provides the dataset at original point cloud density; for region-specific subsets (Singapore / Germany / UK), see [here](#)
 
 ## 📹 Preview
-![preview](images/UnderOneFacade_visualization_1.mp4)
+[There will be a video here]
 
 ## 📝 Abstract
 
