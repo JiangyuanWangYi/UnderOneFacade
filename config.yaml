@@ -1,0 +1,296 @@
+# Set data.root, output.root, weights.root before running.
+data:
+  countries:
+    nottingham:
+      format: asc
+      path: UnderOneFacade_Nottingham/data/LentonRd_SS_0.05
+      splits:
+        test: test
+        train: training
+        val: validation
+    singapore:
+      format: npy
+      path: UnderOneFacade_Singapore
+      splits:
+        test: test
+        train: train
+        val: validation
+    zaha:
+      format: npy
+      path: UnderOneFacade_ZAHA
+      splits:
+        test: test_npy_0.05
+        train: training_npy_0.05
+        val: validation_npy_0.05
+  root: /path/to/UnderOneFacade_data
+features:
+  rgbi:
+    columns:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    num_channels: 7
+  xyz:
+    columns:
+    - 0
+    - 1
+    - 2
+    num_channels: 3
+finetune:
+  epochs: 50
+  freeze_epochs: 0
+  lr_scale: 0.1
+label_offset: 1
+labels:
+  lofg2:
+    mapping_from_lofg3:
+    - 0
+    - 1
+    - 1
+    - 0
+    - 2
+    - 2
+    - 0
+    - 0
+    - 0
+    - 3
+    - 3
+    - 4
+    - 1
+    - 4
+    - 4
+    names:
+    - structural
+    - opening
+    - decoration
+    - floor
+    - other
+    num_classes: 5
+  lofg3:
+    names:
+    - wall
+    - window
+    - door
+    - balcony
+    - molding
+    - deco+
+    - column
+    - arch
+    - stairs
+    - ground surface
+    - terrain
+    - roof
+    - blinds
+    - interior
+    - other
+    num_classes: 15
+models:
+  dgcnn:
+    batch_size: 32
+    block_size: 1.0
+    dropout: 0.5
+    emb_dims: 1024
+    epochs: 100
+    k: 20
+    lr: 0.001
+    num_point: 4096
+    optimizer: Adam
+    scheduler: cosine
+    scheduler_params:
+      T_max: 100
+      eta_min: 1.0e-05
+    weight_decay: 0.0001
+  kpconv:
+    base_radius: 0.1
+    batch_size: 8
+    grad_accum_steps: 2
+    enable_amp: true
+    amp_dtype: float16
+    block_size: 1.0
+    epochs: 100
+    first_feat_dim: 64
+    lr: 0.01
+    nsample: 32
+    num_kpoints: 15
+    num_point: 4096
+    optimizer: Adam
+    scheduler: cosine
+    scheduler_params:
+      T_max: 100
+      eta_min: 1.0e-05
+    weight_decay: 0.001
+  kpconv_full:
+    base_radius: 0.1
+    batch_size: 4
+    grad_accum_steps: 4
+    enable_amp: true
+    amp_dtype: float16
+    block_size: 1.0
+    epochs: 100
+    first_feat_dim: 128
+    lr: 0.01
+    deform_lr_factor: 0.1
+    nsample: 32
+    num_kpoints: 15
+    num_point: 4096
+    influence: linear
+    modulated: false
+    optimizer: Adam
+    scheduler: cosine
+    scheduler_params:
+      T_max: 100
+      eta_min: 1.0e-05
+    weight_decay: 0.001
+    # ZAHAConfig parity (train_ZAHA.py)
+    in_radius: 0.5
+    first_subsampling_dl: 0.05
+    conv_radius: 2.0
+    deform_radius: 5.0
+    KP_extent: 1.2
+    aggregation_mode: sum
+    deform_fitting_power: 1.0
+    repulse_extent: 1.2
+  octformer:
+    batch_size: 2
+    grad_accum_steps: 4
+    enable_amp: false
+    block_size: 10.0
+    octree_depth: 9
+    channels:
+    - 96
+    - 192
+    - 384
+    - 384
+    depth: 8
+    dilation: 4
+    drop_path: 0.5
+    epochs: 100
+    full_depth: 2
+    lr: 0.001
+    num_heads:
+    - 6
+    - 12
+    - 24
+    - 24
+    num_point: 80000
+    optimizer: AdamW
+    patch_size: 32
+    scheduler: cosine
+    scheduler_params:
+      T_max: 100
+      eta_min: 1.0e-06
+    weight_decay: 0.05
+  pointnet:
+    batch_size: 32
+    block_size: 1.0
+    epochs: 100
+    feature_transform: true
+    lr: 0.001
+    num_point: 4096
+    optimizer: Adam
+    scheduler: step
+    scheduler_params:
+      gamma: 0.7
+      step_size: 10
+    weight_decay: 0.0001
+  pointnet2:
+    batch_size: 32
+    block_size: 1.0
+    epochs: 100
+    lr: 0.001
+    num_point: 4096
+    optimizer: Adam
+    scheduler: cosine
+    scheduler_params:
+      T_max: 100
+      eta_min: 1.0e-05
+    weight_decay: 0.0001
+  ptv1:
+    batch_size: 4
+    block_size: 1.5
+    blocks:
+    - 1
+    - 2
+    - 2
+    - 2
+    - 2
+    chunk_size: 8192
+    enable_amp: true
+    amp_dtype: float16
+    epochs: 100
+    lr: 0.005
+    num_point: 8192
+    optimizer: AdamW
+    repeat: 4
+    scheduler: multistep
+    scheduler_params:
+      milestones_pct:
+      - 0.6
+      - 0.8
+      gamma: 0.1
+    weight_decay: 0.02
+  ptv3:
+    batch_size: 2
+    grad_accum_steps: 4
+    enable_amp: true
+    amp_dtype: float16
+    block_size: 10.0
+    dec_channels:
+    - 64
+    - 64
+    - 128
+    - 256
+    dec_depths:
+    - 2
+    - 2
+    - 2
+    - 2
+    dec_num_head:
+    - 4
+    - 4
+    - 8
+    - 16
+    enc_channels:
+    - 32
+    - 64
+    - 128
+    - 256
+    - 512
+    enc_depths:
+    - 2
+    - 2
+    - 2
+    - 6
+    - 2
+    enc_num_head:
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    epochs: 100
+    lr: 0.006
+    num_point: 80000
+    optimizer: AdamW
+    order:
+    - z
+    - z-trans
+    patch_size: 1024
+    scheduler: cosine_warmup
+    scheduler_params:
+      eta_min: 1.0e-06
+      warmup_epochs: 0
+    voxel_size: 0.05
+    weight_decay: 0.05
+output:
+  root: ./outputs
+training:
+  deterministic: false
+  num_workers: 4
+  seed: 999
+weights:
+  root: ./weights

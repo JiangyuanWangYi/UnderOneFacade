@@ -1,0 +1,53 @@
+# UnderOneFacade dependencies
+
+# Core packages
+torch
+numpy
+tqdm
+PyYAML
+
+# Scientific/data
+scipy
+plyfile
+pandas
+
+# Visualization/logging
+tensorboard
+tensorboardx
+matplotlib
+
+# Model-specific
+timm
+einops
+
+# ptv3: sparse convolution + torch-geometric ecosystem
+spconv-cu118
+torch-geometric
+torch-scatter
+torch-sparse
+torch-cluster
+
+# octformer: ocnn + JAB dependencies
+git+https://github.com/octree-nn/ocnn-pytorch.git
+yacs
+scikit-image
+trimesh
+wget
+cyminiball
+protobuf>=3.1.0,<=3.20.0
+thsolver==1.2.0
+
+# Development/formatting (optional)
+yapf
+addict
+termcolor
+black
+
+# 3D processing (optional)
+open3d
+
+# ptv1: pointops CUDA extension (build in-repo after torch)
+#   cd models/pointops_lib && pip install -e .
+
+# Note: Adjust spconv-cu118 to match your CUDA version (cu117, cu118, cu121, etc.)
+# For torch-scatter/sparse/cluster, may need: -f https://data.pyg.org/whl/torch-2.x.x+cuXXX.html
