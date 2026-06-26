@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Virtual environments
+venv/
+env/
+.env
+.env.*
+
+# IDE / tooling
+.vscode/
+.idea/
+.agents/
+.codex/
+*.swp
+*.swo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Weights and checkpoints
+weights/
+*.pth
+*.pt
+*.ckpt
+*.h5
+
+# Outputs and experiment logs
+outputs/
+wandb/
+logs/
+*.log
+slurm-*.out
+*.wilkes3
+
+# Data artifacts
+data/
+*.npy
+*.npz
+*.pkl
+*.pickle
+
+# OS
+.DS_Store
+Thumbs.db
